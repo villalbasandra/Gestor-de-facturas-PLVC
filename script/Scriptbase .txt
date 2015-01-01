@@ -12,7 +12,7 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`Usuario` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
-  `idUsuario` VARCHAR(13) NOT NULL,
+  `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
   `nomUsuario` VARCHAR(30) NOT NULL,
   `dirUsuario` VARCHAR(45) NOT NULL,
   `telUsuario` VARCHAR(12) NOT NULL,
@@ -26,7 +26,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Proveedor` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Proveedor` (
-  `idProveedor` INT NOT NULL,
+  `idProveedor` INT(11) NOT NULL AUTO_INCREMENT,
   `razonproveedor` VARCHAR(45) NOT NULL,
   `dirProveedor` VARCHAR(45) NOT NULL,
   `telProveedor` VARCHAR(45) NOT NULL,
@@ -43,7 +43,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Factura` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Factura` (
-  `idFactura` VARCHAR(10) NOT NULL,
+  `idFactura` INT(11) NOT NULL AUTO_INCREMENT,
   `fecFactura` DATE NOT NULL,
   `subtFactura` FLOAT NOT NULL,
   `descFactura` FLOAT NULL,
@@ -52,19 +52,19 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Factura` (
   `respFactura` VARCHAR(30) NULL,
   `tipFactura` VARCHAR(45) NULL,
   `iceFactura` FLOAT NULL,
-  `Usuario_idUsuario` VARCHAR(13) NOT NULL,
   `Proveedor_idProveedor` INT NOT NULL,
-  PRIMARY KEY (`idFactura`, `Usuario_idUsuario`, `Proveedor_idProveedor`),
-  INDEX `fk_Factura_Usuario_idx` (`Usuario_idUsuario` ASC),
+  `Usuario_idUsuario` INT(11) NOT NULL,
+  PRIMARY KEY (`idFactura`, `Proveedor_idProveedor`, `Usuario_idUsuario`),
   INDEX `fk_Factura_Proveedor1_idx` (`Proveedor_idProveedor` ASC),
-  CONSTRAINT `fk_Factura_Usuario`
-    FOREIGN KEY (`Usuario_idUsuario`)
-    REFERENCES `mydb`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_Factura_Usuario1_idx` (`Usuario_idUsuario` ASC),
   CONSTRAINT `fk_Factura_Proveedor1`
     FOREIGN KEY (`Proveedor_idProveedor`)
     REFERENCES `mydb`.`Proveedor` (`idProveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Factura_Usuario1`
+    FOREIGN KEY (`Usuario_idUsuario`)
+    REFERENCES `mydb`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
