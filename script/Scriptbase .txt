@@ -1,0 +1,75 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+DROP SCHEMA IF EXISTS `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Usuario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Usuario` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
+  `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
+  `nomUsuario` VARCHAR(30) NOT NULL,
+  `dirUsuario` VARCHAR(45) NOT NULL,
+  `telUsuario` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`idUsuario`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Proveedor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Proveedor` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Proveedor` (
+  `idProveedor` INT(11) NOT NULL AUTO_INCREMENT,
+  `razonproveedor` VARCHAR(45) NOT NULL,
+  `dirProveedor` VARCHAR(45) NOT NULL,
+  `telProveedor` VARCHAR(45) NOT NULL,
+  `autSRIProveedor` VARCHAR(45) NOT NULL,
+  `nomComProveedor` VARCHAR(45) NULL,
+  `Proveedorcol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idProveedor`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Factura`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Factura` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Factura` (
+  `idFactura` INT(11) NOT NULL AUTO_INCREMENT,
+  `fecFactura` DATE NOT NULL,
+  `subtFactura` FLOAT NOT NULL,
+  `descFactura` FLOAT NULL,
+  `ivaFactura` FLOAT NULL,
+  `totFactura` FLOAT NOT NULL,
+  `respFactura` VARCHAR(30) NULL,
+  `tipFactura` VARCHAR(45) NULL,
+  `iceFactura` FLOAT NULL,
+  `Proveedor_idProveedor` INT NOT NULL,
+  `Usuario_idUsuario` INT(11) NOT NULL,
+  PRIMARY KEY (`idFactura`, `Proveedor_idProveedor`, `Usuario_idUsuario`),
+  INDEX `fk_Factura_Proveedor1_idx` (`Proveedor_idProveedor` ASC),
+  INDEX `fk_Factura_Usuario1_idx` (`Usuario_idUsuario` ASC),
+  CONSTRAINT `fk_Factura_Proveedor1`
+    FOREIGN KEY (`Proveedor_idProveedor`)
+    REFERENCES `mydb`.`Proveedor` (`idProveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Factura_Usuario1`
+    FOREIGN KEY (`Usuario_idUsuario`)
+    REFERENCES `mydb`.`Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
