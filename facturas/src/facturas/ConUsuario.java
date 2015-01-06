@@ -23,6 +23,8 @@ public class ConUsuario extends javax.swing.JInternalFrame {
      */
     public ConUsuario() {
         initComponents();
+        jTextField1.setText("");
+        jTextField1.requestFocus();
     }
 
     /**
@@ -101,13 +103,15 @@ String g="";
             ResultSet rs=st.executeQuery("select*from usuario");
             while(rs.next()){
                 int d=rs.getInt("idUsuario");
+                String e=rs.getString("cedUsuario");
             String a=rs.getString("nomUsuario");
             String b=rs.getString("dirUsuario");
             String c=rs.getString("telUsuario");
             g=g+"id Usuario..."+d+
-                    "nombre Usuario.."+a+
-                    "direccion Usuario.."+b+
-                    "telefono Usuario...\n"+c;
+                    "\ncedula....."+e+
+                    "\nnombre Usuario.."+a+
+                    "\ndireccion Usuario.."+b+
+                    "\ntelefono Usuario..."+c+"\n";
             
             jTextArea1.setText(null);
             }
