@@ -158,6 +158,7 @@ sql="insert into usuario(cedUsuario,nomUsuario,dirUsuario,"
         } catch (SQLException ex) {
             Logger.getLogger(AUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
