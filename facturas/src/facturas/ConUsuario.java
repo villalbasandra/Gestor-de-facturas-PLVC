@@ -59,6 +59,8 @@ public class ConUsuario extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Consultar Usuarios");
+        setToolTipText("");
         setAutoscrolls(true);
 
         jToggleButton1.setText("Consultar");
@@ -87,12 +89,11 @@ public class ConUsuario extends javax.swing.JInternalFrame {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jToggleButton1)))
-                .addContainerGap(236, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jToggleButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,13 +121,16 @@ String g="";
             ResultSet rs=st.executeQuery("select*from usuario");
             while(rs.next()){
                 int d=rs.getInt("idUsuario");
+               
             String a=rs.getString("nomUsuario");
             String b=rs.getString("dirUsuario");
             String c=rs.getString("telUsuario");
+            String e=rs.getString("cedUsuario");
             g=g+"id Usuario..."+d+
-                    "\nnombre Usuario.."+a+
-                    "\ndireccion Usuario.."+b+
-                    "\ntelefono Usuario..."+c+"\n";
+                    "\nCedula.."+e+
+                    "\nNombre Usuario.."+a+
+                    "\nDireccion Usuario.."+b+
+                    "\nTelefono Usuario..."+c+"\n";
             
             jTextArea1.setText(null);
             }
