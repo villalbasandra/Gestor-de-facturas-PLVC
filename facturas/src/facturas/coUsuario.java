@@ -24,7 +24,7 @@ DefaultTableModel modelo;
      */
     public coUsuario() {
         initComponents();
-        String cabecera[]={"Id Usuario","Cedula","Nombre","Direccion","Telefono"};
+        String cabecera[]={"Cedula","Nombre","Direccion","Telefono"};
         String datos[][]={};
         modelo =new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);

@@ -93,7 +93,7 @@ String tip=(String) jComboBox1.getSelectedItem();
 
         jLabel1.setText("Tipo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Salud", "Alimentación", "Educación", "Vestimenta", "Vivienda", "Mixta" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Salud", "Alimentación", "Ecuación", "Vestimenta", "Vivienda", "Mixta" }));
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

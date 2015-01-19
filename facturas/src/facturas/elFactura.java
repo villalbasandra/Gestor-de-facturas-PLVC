@@ -161,6 +161,7 @@ Connection reg=con.conexion();
         }
         
         mostrar();
+        jTextField1.setText("");
 // TODO add your handling code here:
     } catch (SQLException ex) {
         Logger.getLogger(elFactura.class.getName()).log(Level.SEVERE, null, ex);

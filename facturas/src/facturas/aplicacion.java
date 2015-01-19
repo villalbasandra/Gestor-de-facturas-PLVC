@@ -22,7 +22,8 @@ public class aplicacion extends javax.swing.JFrame {
         initComponents();
         
         conectar con=new conectar(); 
-con.conexion();
+       con.conexion();
+       
     }
 
     /**
@@ -70,7 +71,7 @@ con.conexion();
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 571, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
