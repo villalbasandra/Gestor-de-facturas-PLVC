@@ -171,8 +171,7 @@ dir=jTextField3.getText();
 tel=jTextField4.getText();
 nom=jTextField7.getText();
      String sql;
-sql="insert into proveedor(rucProveedor,razonProveedor,dirProveedor,"
-        + "telProveedor,nomComProveedor)values(?,?,?,?,?);";   
+sql="insert into proveedor(rucProveedor,razonProveedor,dirProveedor,telProveedor,nomComProveedor)values(?,?,?,?,?);";   
         try {
             PreparedStatement path =reg.prepareCall(sql);
              path.setString(1, RUC);
@@ -189,6 +188,7 @@ sql="insert into proveedor(rucProveedor,razonProveedor,dirProveedor,"
             
         } catch (SQLException ex) {
             Logger.getLogger(AProveedor.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Los valores no fueron agregados"+ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
