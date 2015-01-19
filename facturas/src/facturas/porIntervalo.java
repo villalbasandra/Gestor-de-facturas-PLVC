@@ -83,6 +83,10 @@ Connection reg=con.conexion();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Consultar Las Facturas Entre 2 Fechas");
 
         jLabel1.setText("Fecha Inicio");

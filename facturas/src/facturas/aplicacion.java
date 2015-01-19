@@ -22,7 +22,8 @@ public class aplicacion extends javax.swing.JFrame {
         initComponents();
         
         conectar con=new conectar(); 
-con.conexion();
+       con.conexion();
+       
     }
 
     /**
@@ -61,7 +62,6 @@ con.conexion();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,7 +70,7 @@ con.conexion();
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 571, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,15 +255,7 @@ con.conexion();
 
         jMenu5.setText("Resportes");
 
-        jMenuItem21.setText("Resporte en Excel");
-        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem21ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem21);
-
-        jMenuItem22.setText("Reporte en PDF");
+        jMenuItem22.setText("Generar Reporte");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem22ActionPerformed(evt);
@@ -422,13 +414,6 @@ this.Escritorio.add(pn);
 pn.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
-    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-reporteExcel re=new reporteExcel();
-this.Escritorio.add(re);
-re.show();
-// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem21ActionPerformed
-
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
 reportePDF rp=new reportePDF();
 this.Escritorio.add(rp);
@@ -491,7 +476,6 @@ rp.show();// TODO add your handling code here:
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

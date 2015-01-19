@@ -145,7 +145,8 @@ Connection reg=con.conexion();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-mostrar();        // TODO add your handling code here:
+mostrar();    
+jTextField1.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -64,6 +64,7 @@ String fec=jFormattedTextField1.getText();
     } catch (SQLException ex) {
         Logger.getLogger(elProveedor.class.getName()).log(Level.SEVERE, null, ex);
     }
+    jFormattedTextField1.setText("");
 }
     
 

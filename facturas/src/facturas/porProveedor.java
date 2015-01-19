@@ -138,6 +138,7 @@ Connection reg=con.conexion();
     } catch (SQLException ex) {
         Logger.getLogger(porProveedor.class.getName()).log(Level.SEVERE, null, ex);
     }
+    jTextField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -24,7 +24,7 @@ DefaultTableModel modelo;
      */
     public busProveedor() {
         initComponents();
-        String cabecera[]={"idProveedor","Ruc","Razon Social","Direccion","Telefono","Nombre Comercial"};
+        String cabecera[]={"Ruc","Razon Social","Direccion","Telefono","Nombre Comercial"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
