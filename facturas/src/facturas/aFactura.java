@@ -337,6 +337,14 @@ String sql="insert into factura(fecFactura,subtFactura,descFactura,ivaFactura,to
             Logger.getLogger(aFactura.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Los valores no fueron agregados"+ex);
         }
+        jTextField1.setText("");
+jTextField2.setText("");
+jTextField3.setText("");
+jTextField4.setText("");
+jTextField5.setText("");
+jTextField1.requestFocus();
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed

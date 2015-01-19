@@ -11,30 +11,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Alex
  */
-public class elFactura extends javax.swing.JInternalFrame {
+public class porTipo extends javax.swing.JInternalFrame {
 DefaultTableModel modelo;
     /**
-     * Creates new form elFactura
+     * Creates new form porTipo
      */
-    public elFactura() {
+    public porTipo() {
         initComponents();
-        /*fecFactura,subtFactura,descFactura,ivaFactura,totFact
-ura,respFactura,tipFactura,iceFactura,Usuario_cedUsuario,Proveedor_rucProveedor
-*/
         String cabecera[]={"# Factura","Fecha","SubTotal","Descuento","IVA","Total","Responsable","tipo","ice","propietario","Emisor"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
-         jTextField1.setText("");
-        jTextField1.requestFocus();
-        mostrar();
+        
     }
 private void mostrar(){
 for (int i = 0; i < modelo.getRowCount(); i++) {
@@ -46,10 +40,11 @@ for (int i = 0; i < modelo.getRowCount(); i++) {
         
     conectar con=new  conectar();
 Connection reg=con.conexion();
+String tip=(String) jComboBox1.getSelectedItem();
         Statement st;
     try {
         st = reg.createStatement();
-         ResultSet rs=st.executeQuery("select*from factura");
+         ResultSet rs=st.executeQuery("select*from factura where tipFactura='"+tip+"'");
         while(rs.next()){
 /*,,,,,,,,,*/  
             String num=rs.getString("idFactura");
@@ -73,6 +68,8 @@ Connection reg=con.conexion();
     }
 
 }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,7 +80,7 @@ Connection reg=con.conexion();
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -92,12 +89,13 @@ Connection reg=con.conexion();
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Eliminar Factura");
-        setAutoscrolls(true);
+        setTitle("Facturas por Tipo");
 
-        jLabel1.setText("Numero Factura:");
+        jLabel1.setText("Tipo");
 
-        jButton1.setText("Eliminar");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Salud", "Alimentación", "Ecuación", "Vestimenta", "Vivienda", "Mixta" }));
+
+        jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -122,16 +120,16 @@ Connection reg=con.conexion();
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -140,10 +138,10 @@ Connection reg=con.conexion();
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -151,34 +149,15 @@ Connection reg=con.conexion();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-conectar con=new  conectar();
-Connection reg=con.conexion();
-        String ced=jTextField1.getText();
-        Statement st;
-    try {
-        st = reg.createStatement();
-        String sql="delete from factura where idFactura="+ced;
-             int rs=st.executeUpdate(sql);
-             if(rs==1){
-        JOptionPane.showMessageDialog(null, "Se ha borrado el registro");
-        }
-        else{
-       JOptionPane.showMessageDialog(null, "No se pudo borrar el registro");
-        }
-        
-        mostrar();
-// TODO add your handling code here:
-    } catch (SQLException ex) {
-        Logger.getLogger(elFactura.class.getName()).log(Level.SEVERE, null, ex);
-    }
+mostrar();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -159,6 +159,11 @@ sql="insert into usuario(cedUsuario,nomUsuario,dirUsuario,"
         } catch (SQLException ex) {
             Logger.getLogger(AUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jTextField1.setText("");
+ jTextField2.setText("");
+ jTextField3.setText("");
+ jTextField1.requestFocus();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

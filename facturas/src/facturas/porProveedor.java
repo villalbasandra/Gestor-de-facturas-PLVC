@@ -4,33 +4,33 @@
  * and open the template in the editor.
  */
 package facturas;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Alex
  */
-public class elProveedor extends javax.swing.JInternalFrame {
+public class porProveedor extends javax.swing.JInternalFrame {
 DefaultTableModel modelo;
     /**
-     * Creates new form elProveedor
+     * Creates new form porProveedor
      */
-    public elProveedor()  {
+    public porProveedor() {
         initComponents();
-        String cabecera[]={"Ruc","Razon Social","Direccion","Telefono","Nombre Comercial"};
+        String cabecera[]={"# Factura","Fecha","SubTotal","Descuento","IVA","Total","Responsable","tipo","ice","propietario","Emisor"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
          jTextField1.setText("");
         jTextField1.requestFocus();
-        mostrar();
+        
     }
 
     /**
@@ -52,12 +52,11 @@ DefaultTableModel modelo;
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Eliminar Proveedor ");
-        setAutoscrolls(true);
+        setTitle("Consultar facturas por Proveedor");
 
-        jLabel1.setText("Ruc:");
+        jLabel1.setText("RUC del proveedor");
 
-        jButton1.setText("Eliminar");
+        jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -83,13 +82,16 @@ DefaultTableModel modelo;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,73 +102,42 @@ DefaultTableModel modelo;
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mostrar() {
-        
-       for (int i = 0; i < modelo.getRowCount(); i++) {
-           modelo.removeRow(i);
-           i-=1;
-       }
-   
-        
-        
-    conectar con=new  conectar();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+String prov=jTextField1.getText();
+conectar con=new  conectar();
 Connection reg=con.conexion();
         Statement st;
     try {
         st = reg.createStatement();
-         ResultSet rs=st.executeQuery("select*from proveedor");
-        while(rs.next()){
-                
-              String a=rs.getString("razonProveedor");
-            String b=rs.getString("dirProveedor");
-            String c=rs.getString("telProveedor");
-            String e=rs.getString("nomComProveedor");
-            String f=rs.getString("rucProveedor");        
-            Object datos[]={f,a,b,c,e};
+         ResultSet rs=st.executeQuery("select*from factura where Proveedor_rucProveedor="+prov);
+         while(rs.next()){
+             String num=rs.getString("idFactura");
+            String a=rs.getString("fecFactura");
+            String b=rs.getString("subtFactura");
+            String c=rs.getString("descFactura");
+            String d=rs.getString("ivaFactura");
+            String e=rs.getString("totFactura");
+            String f=rs.getString("respFactura");
+            String g=rs.getString("tipFactura");  
+            String h=rs.getString("iceFactura"); 
+            String i=rs.getString("Usuario_cedUsuario");  
+            String j=rs.getString("Proveedor_rucProveedor");  
+            Object datos[]={num,a,b,c,d,e,f,g,h,i,j};
             modelo.addRow(datos);
-           
-            }
+         }
         
+        
+        // TODO add your handling code here:
     } catch (SQLException ex) {
-        Logger.getLogger(elProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(porProveedor.class.getName()).log(Level.SEVERE, null, ex);
     }
-       
-       
-    }
-    
-    
-    
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-conectar con=new  conectar();
-Connection reg=con.conexion();
-        String ced=jTextField1.getText();
-        Statement st;
-        try {
-            st = reg.createStatement();
-            String sql="delete from proveedor where rucProveedor='"+ced+"'";
-             int rs=st.executeUpdate(sql);
-             if(rs==1){
-        JOptionPane.showMessageDialog(null, "Se ha borrado el registro");
-        }
-        else{
-       JOptionPane.showMessageDialog(null, "No se pudo borrar el registro");
-        }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(actUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "error de coneccion"+
-                    ex);
-        }
-        
-        mostrar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

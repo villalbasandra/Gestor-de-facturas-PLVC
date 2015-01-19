@@ -190,6 +190,14 @@ sql="insert into proveedor(rucProveedor,razonProveedor,dirProveedor,telProveedor
             Logger.getLogger(AProveedor.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Los valores no fueron agregados"+ex);
         }
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField1.requestFocus();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
