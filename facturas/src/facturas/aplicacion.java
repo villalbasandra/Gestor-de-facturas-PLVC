@@ -53,6 +53,16 @@ con.conexion();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,7 +179,7 @@ con.conexion();
 
         jMenu4.setText("Consultar Facturas");
 
-        jMenuItem12.setText("Por Proveedor");
+        jMenuItem12.setText("Por Ruc del Proveedor");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
@@ -185,7 +195,78 @@ con.conexion();
         });
         jMenu4.add(jMenuItem13);
 
+        jMenuItem14.setText("Por Fecha");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem14);
+
+        jMenuItem15.setText("Por Mes");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem15);
+
+        jMenuItem16.setText("Por Año");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem16);
+
+        jMenuItem17.setText("Todas Las Facturas");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem17);
+
+        jMenuItem18.setText("Por Intervalo de Tiempo");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem18);
+
+        jMenuItem19.setText("Por Razon Social del Proveedor ");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem19);
+
+        jMenuItem20.setText("Por Nombre Comercial del Proveedor");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem20);
+
         jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Resportes");
+
+        jMenuItem21.setText("Resporte en Excel");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem21);
+
+        jMenuItem22.setText("Reporte en PDF");
+        jMenu5.add(jMenuItem22);
+
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -292,6 +373,57 @@ this.Escritorio.add(pt);
 pt.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+porFecha pf=new porFecha();
+this.Escritorio.add(pf);
+pf.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+porMes pm=new porMes();
+this.Escritorio.add(pm);
+pm.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+porAño pa=new porAño();
+this.Escritorio.add(pa);
+pa.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+todasFacturas tf=new todasFacturas();
+this.Escritorio.add(tf);
+tf.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+porIntervalo pi=new porIntervalo();
+this.Escritorio.add(pi);
+pi.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+porRazon pr=new porRazon();
+this.Escritorio.add(pr);
+pr.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+porNombre pn=new porNombre();
+this.Escritorio.add(pn);
+pn.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+reporteExcel re=new reporteExcel();
+this.Escritorio.add(re);
+re.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -333,13 +465,23 @@ pt.show();// TODO add your handling code here:
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
+    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

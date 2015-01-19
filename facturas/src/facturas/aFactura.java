@@ -342,6 +342,7 @@ jTextField2.setText("");
 jTextField3.setText("");
 jTextField4.setText("");
 jTextField5.setText("");
+jTextField6.setText("");
 jTextField1.requestFocus();
         
         
