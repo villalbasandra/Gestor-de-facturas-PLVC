@@ -197,17 +197,9 @@
             <Property name="text" type="java.lang.String" value="Resportes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem21">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Resporte en Excel"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem21ActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem22">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reporte en PDF"/>
+                <Property name="text" type="java.lang.String" value="Generar Reporte"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem22ActionPerformed"/>

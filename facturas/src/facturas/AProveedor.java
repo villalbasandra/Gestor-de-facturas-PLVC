@@ -33,10 +33,10 @@ public class AProveedor extends javax.swing.JInternalFrame {
         jTextField1.requestFocus();
     }
     
-  /*  public boolean VerificarRuc(String ruc) {
+    public boolean VerificarRuc(String ruc) {
             //Ruc de Persona Natural
             int tamanoLongitudRuc = 13;
-           /* const string establecimiento = "001";*
+           /* const string establecimiento = "001";*/
             int numeroProvincias = 24;
             int modulo = 11;
             int total = 0;
@@ -49,10 +49,18 @@ public class AProveedor extends javax.swing.JInternalFrame {
                     if (sociedad_Persona >= 0 && sociedad_Persona < 6)
                     {
                         //Ruc de Persona Natural
-                        return ruc.substring(10, 3) == "001" && VerificarCedula(ruc.substring(0, 10));
+                        JOptionPane.showMessageDialog(null, ruc.substring(10, 13));
+                        JOptionPane.showMessageDialog(null, ruc.substring(0, 10));
+                        int a;
+                        a=ruc.substring(10, 13).compareTo("001");
+                        JOptionPane.showMessageDialog(null, a);
+                        if(a==0)
+                            return VerificarCedula(ruc.substring(0, 10));
+                        else
+                            return false;
                     }
-                    else /* const int tercerDigito = 6; const string establecimiento = "0001"; *
-                        if (sociedad_Persona == 6 && ruc.substring(9, 4) == "0001")
+                    else /* const int tercerDigito = 6; const string establecimiento = "0001"; */
+                        if (sociedad_Persona == 6 && ruc.substring(9, 13) == "0001")
                         {
                             //Ruc de Personas Públicas/Entidades Estatales
                             int[] coeficientes = { 3, 2, 7, 6, 5, 4, 3, 2 };
@@ -64,8 +72,8 @@ public class AProveedor extends javax.swing.JInternalFrame {
                             int digitoVerificadorObtenido = modulo - (total % modulo);
                             return digitoVerificadorObtenido == digitoVerificadorRecibido;
                         }
-                        else /* const int tercerDigito = 9; const string establecimiento = "001"; *
-                            if (sociedad_Persona == 9 && ruc.substring(10, 3) == "001")
+                        else /* const int tercerDigito = 9; const string establecimiento = "001"; */
+                            if (sociedad_Persona == 9 && ruc.substring(10, 13) == "001")
                             {
                                 //Ruc de sociedades privadas y extranjeros sin cédula
                                 int[] coeficientes = { 4, 3, 2, 7, 6, 5, 4, 3, 2 };
@@ -85,7 +93,7 @@ public class AProveedor extends javax.swing.JInternalFrame {
             }
             else
                 return false;
-}*/
+}
     
     public boolean VerificarCedula(String cedula) {
             int total = 0;
@@ -255,7 +263,7 @@ dir=jTextField3.getText();
 tel=jTextField4.getText();
 nom=jTextField7.getText();
      String sql;
-     if(VerificarRuc(RUC)) {
+  //   if(VerificarRuc(RUC)==true) {
 sql="insert into proveedor(rucProveedor,razonProveedor,dirProveedor,telProveedor,nomComProveedor)values(?,?,?,?,?);";   
         try {
             PreparedStatement path =reg.prepareCall(sql);
@@ -282,9 +290,9 @@ sql="insert into proveedor(rucProveedor,razonProveedor,dirProveedor,telProveedor
         jTextField6.setText("");
         jTextField7.setText("");
         jTextField1.requestFocus();
-     }
-     else
-         JOptionPane.showMessageDialog(null, "El Ruc ingresado no es válido");
+     //}
+    /* else
+         JOptionPane.showMessageDialog(null, "El Ruc ingresado no es válido");*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
