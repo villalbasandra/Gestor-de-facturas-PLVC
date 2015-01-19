@@ -264,6 +264,11 @@ con.conexion();
         jMenu5.add(jMenuItem21);
 
         jMenuItem22.setText("Reporte en PDF");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem22);
 
         jMenuBar1.add(jMenu5);
@@ -423,6 +428,12 @@ this.Escritorio.add(re);
 re.show();
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+reportePDF rp=new reportePDF();
+this.Escritorio.add(rp);
+rp.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     /**
      * @param args the command line arguments
