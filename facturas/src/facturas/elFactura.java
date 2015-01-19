@@ -41,10 +41,7 @@ for (int i = 0; i < modelo.getRowCount(); i++) {
            modelo.removeRow(i);
            i-=1;
        }
-   
-        
-        
-    conectar con=new  conectar();
+conectar con=new  conectar();
 Connection reg=con.conexion();
         Statement st;
     try {
@@ -65,13 +62,10 @@ Connection reg=con.conexion();
             String j=rs.getString("Proveedor_rucProveedor");  
             Object datos[]={num,a,b,c,d,e,f,g,h,i,j};
             modelo.addRow(datos);
-           
             }
-        
     } catch (SQLException ex) {
         Logger.getLogger(elProveedor.class.getName()).log(Level.SEVERE, null, ex);
     }
-
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,8 +90,6 @@ Connection reg=con.conexion();
         setAutoscrolls(true);
 
         jLabel1.setText("Numero Factura:");
-
-        jTextField1.setText("jTextField1");
 
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
