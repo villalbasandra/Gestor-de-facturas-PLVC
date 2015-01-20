@@ -23,8 +23,38 @@ public class AUsuario extends javax.swing.JInternalFrame {
  jTextField1.setText("");
  jTextField2.setText("");
  jTextField3.setText("");
+ jTextField4.setText("");
  jTextField1.requestFocus();
     }
+    
+    public boolean VerificarCedula(String cedula) {
+            int total = 0;
+            int tamanoLongitudCedula = 10;
+            int[] coeficientes = { 2, 1, 2, 1, 2, 1, 2, 1, 2 };
+            int numeroProvincias = 24;
+            int tercerDigito = 6;
+            if (cedula.matches("[0-9]*") && cedula.length() == tamanoLongitudCedula) {
+                int provincia = Integer.parseInt(cedula.charAt(0) + "" + cedula.charAt(1));
+                int digitoTres = Integer.parseInt(cedula.charAt(2) + "");
+                if ((provincia > 0 && provincia <= numeroProvincias) && digitoTres < tercerDigito) {
+                    int digitoVerificadoRecibido = Integer.parseInt(cedula.charAt(9) + "");
+                    for (int i = 0; i < coeficientes.length; i++) {
+                        int valor = Integer.parseInt(coeficientes[i] + "") * Integer.parseInt(cedula.charAt(i) + "");
+                        total = valor >= 10 ? total + (valor - 9) : total + valor;
+                    }
+                    int digitoVerificadorObtenido = total >= 10 ?
+                                                        (total % 10) != 0 ?
+                                                            10 - (total % 10) :
+                                                        (total % 10) :
+                                                    total;
+                    return digitoVerificadorObtenido == digitoVerificadoRecibido;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,6 +169,7 @@ dir=jTextField2.getText();
 tel=jTextField3.getText();
 ced=jTextField4.getText();
 String sql;
+if(VerificarCedula(ced)) {
 sql="insert into usuario(cedUsuario,nomUsuario,dirUsuario,"
         + "telUsuario)values(?,?,?,?);";
 
@@ -158,7 +189,16 @@ sql="insert into usuario(cedUsuario,nomUsuario,dirUsuario,"
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(AUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"el numero de cedula del\n usuario ya se encuentra en el sistema");
         }
+        jTextField1.setText("");
+ jTextField2.setText("");
+ jTextField3.setText("");
+ jTextField4.setText("");
+ jTextField1.requestFocus();
+}
+else
+    JOptionPane.showMessageDialog(null, "La cédula ingresada no es correcta");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

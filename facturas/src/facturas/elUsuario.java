@@ -106,7 +106,7 @@ Connection reg=con.conexion();
             JOptionPane.showMessageDialog(null, "error de coneccion"+
                     ex);
         }
-
+jTextField1.setText("");
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
