@@ -133,7 +133,7 @@ conectar con=new  conectar();
 Connection reg=con.conexion();
     try {
         Statement st=reg.createStatement();
-     ResultSet rs=st.executeQuery("select*from proveedor where rucProveedor="+ced);
+     ResultSet rs=st.executeQuery("select*from proveedor where rucProveedor='"+ced+"'");
         while(rs.next()){
                 
               String a=rs.getString("razonProveedor");
