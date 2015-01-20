@@ -234,7 +234,12 @@ public void tipoDoc(String tipoDoc) {
         /* "C:\\Users\\Alex\\Documents\\NetBeansProjects\\Gestor-de-facturas-PLVC\\facturas\\src\\facturas\\reportFacturas.jrxml" */
         String dir="..\\facturas\\src\\facturas\\reportFacturas.jrxml";
 =======
+<<<<<<< HEAD
+        /* "C:\\Users\\Alex\\Documents\\NetBeansProjects\\Gestor-de-facturas-PLVC\\facturas\\src\\facturas\\reportFacturas.jrxml" */
+        String dir="..\\facturas\\src\\facturas\\reportFacturas.jrxml";
+=======
         String dir="C:\\Users\\Alex\\Documents\\GitHub\\Gestor-de-facturas-PLVC\\facturas\\src\\facturas\\reportFactura.jrxml";
+>>>>>>> origin/scriptMySQL
 >>>>>>> origin/scriptMySQL
         JasperReport reporteFacts = JasperCompileManager.compileReport(dir);
         JasperPrint mostarReporte = JasperFillManager.fillReport(reporteFacts, null, con.conexion());

@@ -129,7 +129,11 @@ Connection reg=con.conexion();
 <<<<<<< HEAD
              if(!a.equals(clave)){JOptionPane.showMessageDialog(null, "La clave ingresada es incorrecta");
 =======
+<<<<<<< HEAD
+             if(!a.equals(clave)){JOptionPane.showMessageDialog(null, "La clave ingresada es incorrecta");
+=======
              if(!a.equals(clave)){JOptionPane.showMessageDialog(null, "clave ingresa es incorrecta");
+>>>>>>> origin/scriptMySQL
 >>>>>>> origin/scriptMySQL
              System.exit(0);
              }
