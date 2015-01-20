@@ -5,26 +5,48 @@
  */
 package facturas;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Boolean;
+import java.awt.Color;
+import java.awt.Rectangle;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Alex
  */
 public class aplicacion extends javax.swing.JFrame {
-
+public static String a;
     /**
      * Creates new form aplicacion
      */
     public aplicacion() {
+       
         initComponents();
-        
+      a();
+        jMenu1.setEnabled(false);
+        jMenu2.setEnabled(false);
+        jMenu3.setEnabled(false);
+        jMenu4.setEnabled(false);
+        jMenu5.setEnabled(false);
+       jMenu6.setEnabled(false);
         conectar con=new conectar(); 
        con.conexion();
        
     }
+    
+    public void a(){
+    login log=new login( );
+       this.Escritorio.add(log);
+       log.show();
+    
+    
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +85,9 @@ public class aplicacion extends javax.swing.JFrame {
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem22 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem23 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -253,7 +278,7 @@ public class aplicacion extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Resportes");
+        jMenu5.setText("Reportes");
 
         jMenuItem22.setText("Generar Reporte");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
@@ -264,6 +289,26 @@ public class aplicacion extends javax.swing.JFrame {
         jMenu5.add(jMenuItem22);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Login");
+
+        jMenuItem21.setText("Agregar Cuenta");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem21);
+
+        jMenuItem23.setText("Eliminar Cuenta");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem23);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -297,6 +342,7 @@ a.show();
  coUsuario co=new coUsuario();
  this.Escritorio.add(co);
  co.show();
+ 
     // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -307,7 +353,7 @@ au.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-AProveedor ap=new AProveedor();
+aProveedor ap=new aProveedor();
 this.Escritorio.add(ap);
 ap.show();
 // TODO add your handling code here:
@@ -420,6 +466,18 @@ this.Escritorio.add(rp);
 rp.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+aCuenta acu=new aCuenta();
+this.Escritorio.add(acu);
+acu.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+eCuenta ecs=new eCuenta();
+this.Escritorio.add(ecs);
+ecs.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -457,11 +515,12 @@ rp.show();// TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    public static javax.swing.JMenu jMenu1;
+    public static javax.swing.JMenu jMenu2;
+    public static javax.swing.JMenu jMenu3;
+    public static javax.swing.JMenu jMenu4;
+    public static javax.swing.JMenu jMenu5;
+    public static javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -476,7 +535,9 @@ rp.show();// TODO add your handling code here:
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

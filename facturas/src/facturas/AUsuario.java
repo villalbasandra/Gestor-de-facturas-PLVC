@@ -189,6 +189,7 @@ sql="insert into usuario(cedUsuario,nomUsuario,dirUsuario,"
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(AUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"el numero de cedula del\n usuario ya se encuentra en el sistema");
         }
         jTextField1.setText("");
  jTextField2.setText("");
