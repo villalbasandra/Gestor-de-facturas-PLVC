@@ -150,25 +150,24 @@ conectar con=new  conectar();
 Connection reg=con.conexion();
 String a,b,c;
 String ced;
-int count=0,d=0;
+int count=0;
 ced=jTextField4.getText();
 
 Statement st;
         try {
             st = reg.createStatement();
-            ResultSet rs=st.executeQuery("select nomUsuario,dirUsuario,telUsuario"
-                    + ",idUsuario from usuario where cedUsuario="+ced);
+            ResultSet rs=st.executeQuery("select * from usuario where cedUsuario="+ced);
            
             while(rs.next()){
              a=rs.getString("nomUsuario");
              b=rs.getString("dirUsuario");
              c=rs.getString("telUsuario");
-             d=rs.getInt("idUsuario");
-             int glob=d;
+             
+             
              jTextField1.setText(a);
             jTextField2.setText(b);
             jTextField3.setText(c); 
-            JOptionPane.showMessageDialog(null, "Usted es el usuario:"+d);
+           
             count++;
             }
         } catch (SQLException ex) {
