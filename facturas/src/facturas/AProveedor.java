@@ -159,7 +159,12 @@ sql="insert into proveedor (rucProveedor,razonProveedor,nomComProveedor,dirProve
     }else{
         JOptionPane.showMessageDialog(null, "error de coneccion");
     }
-            
+       jTextField1.setText("");
+ jTextField2.setText("");
+ jTextField3.setText("");
+ jTextField4.setText("");
+ jTextField5.setText("");
+ jTextField1.requestFocus();     
 // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(aProveedor.class.getName()).log(Level.SEVERE, null, ex);

@@ -24,7 +24,7 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`Usuario` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
-  `cedUsuario` INT(11) NOT NULL,
+  `cedUsuario` varchar(15) NOT NULL,
   `nomUsuario` VARCHAR(45) NOT NULL,
   `dirUsuario` VARCHAR(45) NOT NULL,
   `telUsuario` VARCHAR(12) NULL,
@@ -38,7 +38,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Proveedor` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Proveedor` (
-  `rucProveedor` INT(15) NOT NULL,
+  `rucProveedor` varchar(15) NOT NULL,
   `razonProveedor` VARCHAR(45) NOT NULL,
   `nomComProveedor` VARCHAR(45) NULL,
   `dirProveedor` VARCHAR(45) NOT NULL,
@@ -53,7 +53,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Factura` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Factura` (
-  `idFactura` INT(11) NOT NULL AUTO_INCREMENT,
+  `idFactura` int(11) NOT NULL auto_increment,
   `fecFactura` DATE NOT NULL,
   `subtFactura` FLOAT NOT NULL,
   `descFactura` FLOAT NULL,
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Factura` (
   `respFactura` VARCHAR(45) NULL,
   `tipFactura` VARCHAR(45) NOT NULL,
   `iceFactura` VARCHAR(45) NULL,
-  `Usuario_cedUsuario` INT(11) NOT NULL,
-  `Proveedor_rucProveedor` INT(15) NOT NULL,
+  `Usuario_cedUsuario` varchar(15) NOT NULL,
+  `Proveedor_rucProveedor` varchar(15) NOT NULL,
   PRIMARY KEY (`idFactura`),
   INDEX `fk_Factura_Usuario_idx` (`Usuario_cedUsuario` ASC),
   INDEX `fk_Factura_Proveedor1_idx` (`Proveedor_rucProveedor` ASC),
@@ -87,8 +87,6 @@ DROP TABLE IF EXISTS `mydb`.`control` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`control` (
   `nomUsuario` VARCHAR(30) NOT NULL,
   `claUsuario` VARCHAR(45) NOT NULL,
-  `preUsuario` VARCHAR(45) NOT NULL,
-  `pisUsuario` VARCHAR(45) NULL,
   PRIMARY KEY (`nomUsuario`))
 ENGINE = InnoDB;
 
@@ -96,3 +94,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+insert into control values('alex','alex');
+insert into control values('root','root');
