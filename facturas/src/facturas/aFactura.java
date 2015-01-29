@@ -325,7 +325,7 @@ String sql="insert into factura(fecFactura,subtFactura,descFactura,ivaFactura,to
              path.setString(10, ruc);
              int n=path.executeUpdate();
             if(n>0){
-    JOptionPane.showMessageDialog(null, "Valores Agrgeados correctamente");
+    JOptionPane.showMessageDialog(null, "Valores Agreados correctamente");
     }else{
         JOptionPane.showMessageDialog(null, "Los valores no fueron agregados");
     }
