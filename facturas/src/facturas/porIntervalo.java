@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -19,15 +20,16 @@ DefaultTableModel modelo;
      */
     public porIntervalo() {
         initComponents();
-        String cabecera[]={"Emisor","# Factura","Fecha","Descuento","IVA","ICE","Total"};
+        String cabecera[]={"Emisor","# Factura","Fecha","Descuento","IVA","Total"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
     }
     
     private void mostrar(){  
-        String inicio=jFormattedTextField1.getText();
-        String fin =jFormattedTextField2.getText();
+        String inicio, fin;
+        inicio=jDateChooser1.getCalendar().get(Calendar.YEAR)+"-"+(jDateChooser1.getCalendar().get(Calendar.MONTH)+1)+"-"+jDateChooser1.getCalendar().get(Calendar.DATE);
+        fin=jDateChooser2.getCalendar().get(Calendar.YEAR)+"-"+(jDateChooser2.getCalendar().get(Calendar.MONTH)+1)+"-"+jDateChooser2.getCalendar().get(Calendar.DATE);
         for (int i = 0; i < modelo.getRowCount(); i++) {
            modelo.removeRow(i);
            i-=1;
@@ -47,14 +49,14 @@ DefaultTableModel modelo;
             while(rs.next()){ 
                 String num=rs.getString("razProveedor");
                 String a=rs.getString("numFactura");
-                String c=rs.getString("tipFactura");
+                
                 String d=rs.getString("fecFactura");
-                String e=rs.getString("subFactura");
+                
                 String f=rs.getString("descFactura");
                 String g=rs.getString("ivaFactura");  
-                String h=rs.getString("iceFactura"); 
+                
                 String i=rs.getString("totFactura");  
-                Object datos[]={num,a,c,d,e,f,g,h,i};
+                Object datos[]={num,a,d,f,g,i};
                 modelo.addRow(datos);
             }
     } catch (SQLException ex) {

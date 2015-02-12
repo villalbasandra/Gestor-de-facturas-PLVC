@@ -25,7 +25,7 @@ DefaultTableModel modelo;
      */
     public porAño() {
         initComponents();
-        String cabecera[]={"Emisor","# Factura","Tipo", "Fecha","SubTotal","Descuento","IVA","ICE", "Total"};
+        String cabecera[]={"Emisor","# Factura","Fecha","Descuento","IVA","Total"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
@@ -45,21 +45,23 @@ Connection reg=con.Conectar();
         Statement st;
     try {
         st = reg.createStatement();
-         ResultSet rs=st.executeQuery("select p.razProveedor, f.numFactura, f.tipFactura, f.fecFactura, " +
-                     "f.subFactura, f.descFactura, f.ivaFactura, f.iceFactura, f.totFactura from proveedor p, factura f, usuario u " +
-                    "where p.rucProveedor = f.rucProveedor and u.cedUsuario = f.cedUsuario and u.cedUsuario='"+aplicacion.user+"' and "
-                 + "YEAR(fecFactura)="+mes);
+         ResultSet rs=st.executeQuery("select p.razProveedor, f.numFactura, f.fecFactura, " +
+"                     f.descFactura, f.ivaFactura, f.totFactura from proveedor p, factura f, usuario u " +
+"                    where p.rucProveedor = f.rucProveedor and u.cedUsuario = f.cedUsuario and u.cedUsuario='"+aplicacion.user+"' " +
+"                     and where YEAR(fecFactura)="+mes);
+                 
             while(rs.next()){ 
                 String num=rs.getString("razProveedor");
                 String a=rs.getString("numFactura");
-                String c=rs.getString("tipFactura");
+                
                 String d=rs.getString("fecFactura");
-                String e=rs.getString("subFactura");
+                
                 String f=rs.getString("descFactura");
                 String g=rs.getString("ivaFactura");  
-                String h=rs.getString("iceFactura"); 
-                String i=rs.getString("totFactura");  
-                Object datos[]={num,a,c,d,e,f,g,h,i};
+                
+                String i=rs.getString("totFactura");
+                Object datos[]={num,a,d,f,g,i};
+                
             modelo.addRow(datos);
             }
     } catch (SQLException ex) {

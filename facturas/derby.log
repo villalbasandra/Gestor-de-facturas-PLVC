@@ -1,13 +1,10 @@
 ----------------------------------------------------------------
-Tue Feb 10 19:48:00 COT 2015:
- Arrancando Derby versión The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835): instancia a816c00e-014b-761b-6099-000004be9c50 
-en el directorio de base de datos C:\Users\Alex\Documents\NetBeansProjects\Gestor-de-facturas-PLVC-master\facturas\DB\Facturas.DB  con el cargador de clases sun.misc.Launcher$AppClassLoader@1667a232
+Wed Feb 11 19:50:20 COT 2015:
+ Arrancando Derby versión The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instancia a816c00e-014b-7b43-ddbb-00000332e828 
+en el directorio de base de datos D:\Proyecto Libres\Proyecto\Gestor-de-facturas-PLVC-master\Gestor-de-facturas-PLVC-master\facturas\DB\Facturas.DB  con el cargador de clases sun.misc.Launcher$AppClassLoader@1875303f
 
 java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_71-b14
-user.dir=C:\Users\Alex\Documents\NetBeansProjects\Gestor-de-facturas-PLVC-master\facturas
-os.name=Windows 8.1
-os.arch=amd64
-os.version=6.3
+java.runtime.version=1.7.0_10-b18
+user.dir=D:\Proyecto Libres\Proyecto\Gestor-de-facturas-PLVC-master\Gestor-de-facturas-PLVC-master\facturas
 derby.system.home=null
 Cargador de clases de base de datos iniciado - derby.database.classpath=''
