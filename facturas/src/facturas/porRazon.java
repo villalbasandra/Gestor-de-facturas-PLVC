@@ -19,35 +19,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class porRazon extends javax.swing.JInternalFrame {
 DefaultTableModel modelo;
+Operaciones operar = new Operaciones();
     /**
      * Creates new form porRazon
      */
     public porRazon() {
         initComponents();
-        combo();
-        String cabecera[]={"# Factura","Fecha","SubTotal","Descuento","IVA","Total","Responsable","tipo","ice","propietario","Emisor"};
+        
+        String cabecera[]={"Emisor","# Factura","Fecha","Descuento","IVA","Total"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
+        operar.ComboRucRazon("razProveedor", jComboBox1);
     }
     
-private void combo(){
-conectar con=new  conectar();
-Connection reg=con.conexion();
-        try {
-            Statement st=reg.createStatement();
-            ResultSet rs=st.executeQuery("select razonProveedor from proveedor ");
-        while(rs.next()){
-                
-            String f=rs.getString("razonProveedor");        
-            //Object datos[]={d,f,a,b,c,e};
-           jComboBox1.addItem(f);
-           
-            } 
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(aFactura.class.getName()).log(Level.SEVERE, null, ex);
-        }}
+
 private void mostrar(){
      String raz=(String) jComboBox1.getSelectedItem();
 for (int i = 0; i < modelo.getRowCount(); i++) {
@@ -55,31 +41,25 @@ for (int i = 0; i < modelo.getRowCount(); i++) {
            i-=1;
        }
 conectar con=new  conectar();
-Connection reg=con.conexion();
+Connection reg=con.Conectar();
 
 
         Statement st;
     try {
+        
         st = reg.createStatement();
-         ResultSet rs=st.executeQuery("select DISTINCT idFactura,fecFactura,subtFactura,descFactura,ivaFactura,"
-                 + "totFactura,respFactura,tipFactura,iceFactura,Usuario_cedUsuario,Proveedor_rucProveedor "
-                 + "from factura F INNER JOIN Proveedor P on F.Proveedor_rucProveedor=P.rucProveedor where razonProveedor='"+raz+"'");
-        while(rs.next()){
-/*,,,,,,,,,*/  
-            String num=rs.getString("idFactura");
+         ResultSet rs=st.executeQuery("select numFactura, fecFactura, descFactura, " +
+                     "ivaFactura, totFactura from factura f, proveedor p where f.rucProveedor=p.rucProveedor and p.razProveedor='"+raz+"'");
+         while(rs.next()){
+             String num=rs.getString("numFactura");
             String a=rs.getString("fecFactura");
-            String b=rs.getString("subtFactura");
+            
             String c=rs.getString("descFactura");
             String d=rs.getString("ivaFactura");
             String e=rs.getString("totFactura");
-            String f=rs.getString("respFactura");
-            String g=rs.getString("tipFactura");  
-            String h=rs.getString("iceFactura"); 
-            String i=rs.getString("Usuario_cedUsuario");  
-            String j=rs.getString("Proveedor_rucProveedor");  
-            Object datos[]={num,a,b,c,d,e,f,g,h,i,j};
+            Object datos[]={num,a,c,d,e};
             modelo.addRow(datos);
-            }
+         }
     } catch (SQLException ex) {
         Logger.getLogger(elProveedor.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -99,15 +79,17 @@ Connection reg=con.conexion();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Facturas Por Razon Social del Proveedor");
+        setTitle("Facturas Por Razón Social del Proveedor");
 
-        jLabel1.setText("Razon Social");
+        jLabel1.setText("Razón Social");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,32 +110,43 @@ Connection reg=con.conexion();
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/open.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(196, 196, 196)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton1))))
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton1)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jButton1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,6 +161,7 @@ mostrar();        // TODO add your handling code here:
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
