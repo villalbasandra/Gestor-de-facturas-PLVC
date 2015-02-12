@@ -86,11 +86,9 @@ public class aplicacion extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
@@ -232,15 +230,6 @@ public class aplicacion extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem19);
 
-        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
-        jMenuItem13.setText("Por Tipo");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem13);
-
         jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jMenuItem18.setText("Por Intervalo de Tiempo");
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
@@ -267,15 +256,6 @@ public class aplicacion extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem16);
-
-        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
-        jMenuItem15.setText("Por Mes");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem15);
 
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jMenuItem17.setText("Todas Las Facturas");
@@ -419,37 +399,17 @@ public class aplicacion extends javax.swing.JFrame {
         pp.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-porTipo pt=new porTipo();
-this.Escritorio.add(pt);
-pt.show();// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
-
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
 porFecha pf=new porFecha();
 this.Escritorio.add(pf);
 pf.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-porMes pm=new porMes();
-this.Escritorio.add(pm);
-pm.show();
-// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
-
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
 porAño pa=new porAño();
 this.Escritorio.add(pa);
 pa.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem16ActionPerformed
-
-    //<editor-fold>
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        todasFacturas tf=new todasFacturas();
-        this.Escritorio.add(tf);
-        tf.show();// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     //<editor-fold>
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
@@ -501,6 +461,13 @@ pr.show();
         //</editor-fold>
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    //<editor-fold>
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        todasFacturas tf=new todasFacturas();
+        this.Escritorio.add(tf);
+        tf.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
     //</editor-fold>
     
     /**
@@ -553,9 +520,7 @@ pr.show();
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
