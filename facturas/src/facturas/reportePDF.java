@@ -45,7 +45,7 @@ for (int i = 0; i < modelo.getRowCount(); i++) {
            i-=1;
        }
 conectar con=new  conectar();
-Connection reg=con.conexion();
+Connection reg=con.Conectar();
 
 
         Statement st;
@@ -173,6 +173,7 @@ public void tipoDoc(String tipoDoc) {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -180,6 +181,7 @@ public void tipoDoc(String tipoDoc) {
         setResizable(true);
         setTitle("Generar Reporte en PDF");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/Copia de copy.gif"))); // NOI18N
         jButton1.setText("Generar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,27 +202,37 @@ public void tipoDoc(String tipoDoc) {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/paste.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(jButton1)
+                .addGap(125, 125, 125)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
         );
 
         pack();
@@ -233,7 +245,7 @@ public void tipoDoc(String tipoDoc) {
         /* "C:\\Users\\Alex\\Documents\\NetBeansProjects\\Gestor-de-facturas-PLVC\\facturas\\src\\facturas\\reportFacturas.jrxml" */
         String dir="..\\facturas\\src\\facturas\\reportFacturas.jrxml";
         JasperReport reporteFacts = JasperCompileManager.compileReport(dir);
-        JasperPrint mostarReporte = JasperFillManager.fillReport(reporteFacts, null, con.conexion());
+        JasperPrint mostarReporte = JasperFillManager.fillReport(reporteFacts, null, con.Conectar());
                 JasperViewer.viewReport(mostarReporte);
         }
         catch(JRException e) {
@@ -245,6 +257,7 @@ public void tipoDoc(String tipoDoc) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

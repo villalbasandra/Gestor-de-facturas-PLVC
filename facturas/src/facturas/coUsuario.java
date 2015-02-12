@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package facturas;
 
 import java.sql.Connection;
@@ -11,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Alex
  */
 public class coUsuario extends javax.swing.JInternalFrame {
-DefaultTableModel modelo;
+    DefaultTableModel modelo;
     /**
      * Creates new form coUsuario
      */
@@ -28,8 +24,8 @@ DefaultTableModel modelo;
         String datos[][]={};
         modelo =new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
-   jTextField1.setText("");
-   jTextField1.requestFocus();
+        jTextField1.setText("");
+        jTextField1.requestFocus();
     }
 
     /**
@@ -46,6 +42,7 @@ DefaultTableModel modelo;
         jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -54,8 +51,9 @@ DefaultTableModel modelo;
         setTitle("Consultar Usuario");
         setAutoscrolls(true);
 
-        jLabel1.setText("Cedula:");
+        jLabel1.setText("Cédula:");
 
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jToggleButton1.setText("Buscar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,75 +74,95 @@ DefaultTableModel modelo;
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.PNG"))); // NOI18N
+        jLabel2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jLabel2PropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(53, 53, 53)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addGap(215, 215, 215))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButton1)
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //<editor-fold desc="Botón Buscae">
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-       String ced;
-       ced=jTextField1.getText();
+        String ced;
+        int contador=0;
+        ced=jTextField1.getText();
         for (int i = 0; i < modelo.getRowCount(); i++) {
-           modelo.removeRow(i);
-           i-=1;
-       }
+            modelo.removeRow(i);
+            i-=1;
+        }
         conectar con=new  conectar();
-Connection reg=con.conexion();
-    try {
-        Statement st=reg.createStatement();
-         ResultSet rs=st.executeQuery("select*from usuario where cedUsuario="+ced);
-        while(rs.next()){
-               
-              String a=rs.getString("cedUsuario");
-            String b=rs.getString("nomUsuario");
-            String c=rs.getString("dirUsuario");
-            String e=rs.getString("telUsuario");
-                  
-            Object datos[]={a,b,c,e};
-            modelo.addRow(datos);
-           
+        Connection reg=con.Conectar();
+        try {            
+            Statement st=reg.createStatement();
+            ResultSet rs=st.executeQuery("select nomUsuario, dirUsuario, telUsuario from usuario where cedUsuario='"+ced+"'");
+            while(rs.next()){               
+                String b=rs.getString("nomUsuario");
+                String c=rs.getString("dirUsuario");
+                String e=rs.getString("telUsuario");
+                Object datos[]={ced,b,c,e};
+                modelo.addRow(datos);
+                contador++;
             }
-        
-        
-        
-        
-// TODO add your handling code here:
-    } catch (SQLException ex) {
-        Logger.getLogger(coUsuario.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(coUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(contador==0)
+            JOptionPane.showMessageDialog(null, "El usuario ingresado no se encuentra registrado", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+    //</editor-fold>
+    
+    private void jLabel2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLabel2PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2PropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;

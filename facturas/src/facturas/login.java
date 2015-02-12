@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package facturas;
 
 import java.io.UnsupportedEncodingException;
@@ -27,8 +22,7 @@ public class login extends javax.swing.JInternalFrame {
      */
     public login() {
         initComponents();
-        
-        
+        aplicacion.jMenu6.setEnabled(false);
     }
 
     /**
@@ -46,23 +40,27 @@ public class login extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jPasswordField2 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("LOGIN");
 
-        jLabel1.setText("Usuario");
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel1.setText("Núm Cédula:");
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Contraseña:");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos-16x16-gif-transparente-1/forward.gif"))); // NOI18N
         jButton1.setText("Entrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/registro.PNG"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,38 +69,45 @@ public class login extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField2)))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jPasswordField2))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel4)))
+                .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(152, 152, 152))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1))
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel2))
+                    .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jLabel3))
         );
 
@@ -110,46 +115,39 @@ public class login extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-String user=jTextField1.getText();
-String clave="";
-
-char[] password=jPasswordField2.getPassword();
-for(int x=0;x<password.length;x++){
-clave+=password[x];
-}
-
-conectar con=new  conectar();
-Connection reg=con.conexion();
+        String user=jTextField1.getText();
+        String clave="";
+        char[] password=jPasswordField2.getPassword();
+        for(int x=0;x<password.length;x++){
+            clave+=password[x];
+        }
+        conectar con=new  conectar();
+        Connection reg=con.Conectar();
         try {
             Statement st=reg.createStatement();
-            ResultSet rs=st.executeQuery("select claUsuario from control where nomUsuario='"+user+"'");
-        while(rs.next()){
-             String a=rs.getString("claUsuario");
-             
-             if(!a.equals(clave)){JOptionPane.showMessageDialog(null, "La clave ingresada es incorrecta");
-             System.exit(0);
-             }
-             else{
-               aplicacion.jMenu1.setEnabled(true);
-               aplicacion.jMenu2.setEnabled(true);
-               aplicacion.jMenu3.setEnabled(true);
-               aplicacion.jMenu4.setEnabled(true);
-               aplicacion.jMenu5.setEnabled(true);
-               aplicacion.jMenu6.setEnabled(true);
-                this.dispose();
-                 
-               
-                
-             }
-             
-                          }
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            ResultSet rs=st.executeQuery("select passUsuario from usuario where cedUsuario='"+user+"'");
+            while(rs.next()){          
+                String a=rs.getString("passUsuario");
+                if(!a.equals(clave)){
+                    JOptionPane.showMessageDialog(null, "La clave ingresada es incorrecta");
+                    System.exit(0);
+                }
+                else{
+                    aplicacion.jMenu1.setEnabled(true);
+                    aplicacion.jMenu2.setEnabled(true);
+                    aplicacion.jMenu3.setEnabled(true);
+                    aplicacion.jMenu4.setEnabled(true);
+//                    aplicacion.jMenu5.setEnabled(true);
+                    aplicacion.jMenu6.setEnabled(true);
+                    
+                    aplicacion.user = user;
+                    this.dispose(); 
+               }         
+            }
         }
-
-        
+        catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }   
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -158,6 +156,7 @@ Connection reg=con.conexion();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

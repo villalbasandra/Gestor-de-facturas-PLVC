@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package facturas;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Boolean;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,34 +16,49 @@ import javax.swing.JTextField;
  * @author Alex
  */
 public class aplicacion extends javax.swing.JFrame {
-public static String a;
+    public static String user;
+    public static int corrida=0;
     /**
      * Creates new form aplicacion
      */
     public aplicacion() {
-       
         initComponents();
-      a();
-        jMenu1.setEnabled(false);
-        jMenu2.setEnabled(false);
-        jMenu3.setEnabled(false);
-        jMenu4.setEnabled(false);
-        jMenu5.setEnabled(false);
-       jMenu6.setEnabled(false);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.Escritorio.setMaximumSize(null);
         conectar con=new conectar(); 
-       con.conexion();
-       
+        //con.Conectar();
+        if(con.Conectar()==null) { //Primera vez que se usa la palicación
+            con.CrearBD();
+            jMenu1.setEnabled(true);
+            jMenu2.setEnabled(true);
+            jMenu3.setEnabled(true);
+            jMenu4.setEnabled(true);
+        
+            jMenu6.setEnabled(true);
+            jMenuItem21.setEnabled(false); //dehabilita iniciar sesión
+            AUsuario a=new AUsuario();
+            this.Escritorio.add(a);
+            a.show();
+        }
+        else { //ya se ha usado la aplicación anteriormente
+            jMenu1.setEnabled(false);
+            jMenu2.setEnabled(false);
+            jMenu3.setEnabled(false);
+            jMenu4.setEnabled(false);
+            
+            jMenu6.setEnabled(false);
+            a();
+            jMenuItem21.setEnabled(false);
+        }  
     }
     
-    public void a(){
-    login log=new login( );
-       this.Escritorio.add(log);
-       log.show();
-    
-    
-    }
-    
-
+  //<editor-fold desc="Login">   
+    public void a(){    
+        login log=new login( );
+        this.Escritorio.add(log);        
+        log.show();
+    } //</editor-fold>
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,47 +74,45 @@ public static String a;
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem20 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem22 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestor de Facturas PLVC");
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 268, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Usuario");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/copy.gif"))); // NOI18N
         jMenuItem1.setText("Agregar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +121,7 @@ public static String a;
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/edit.gif"))); // NOI18N
         jMenuItem2.setText("Actualizar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +130,7 @@ public static String a;
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jMenuItem3.setText("Consultar");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,18 +139,11 @@ public static String a;
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("Eliminar");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem4);
-
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Proveedor");
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/copy.gif"))); // NOI18N
         jMenuItem5.setText("Agregar");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,6 +152,7 @@ public static String a;
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/edit.gif"))); // NOI18N
         jMenuItem6.setText("Actualizar");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,14 +161,7 @@ public static String a;
         });
         jMenu2.add(jMenuItem6);
 
-        jMenuItem7.setText("Eliminar");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem7);
-
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jMenuItem8.setText("Buscar");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,10 +170,20 @@ public static String a;
         });
         jMenu2.add(jMenuItem8);
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/delete.gif"))); // NOI18N
+        jMenuItem7.setText("Eliminar");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Factura");
 
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/copy.gif"))); // NOI18N
         jMenuItem9.setText("Agregar ");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,14 +192,7 @@ public static String a;
         });
         jMenu3.add(jMenuItem9);
 
-        jMenuItem10.setText("Eliminar");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem10);
-
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jMenuItem11.setText("Actualizar");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,10 +201,20 @@ public static String a;
         });
         jMenu3.add(jMenuItem11);
 
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/delete.gif"))); // NOI18N
+        jMenuItem10.setText("Eliminar");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem10);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Consultar Facturas");
 
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jMenuItem12.setText("Por Ruc del Proveedor");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,54 +223,7 @@ public static String a;
         });
         jMenu4.add(jMenuItem12);
 
-        jMenuItem13.setText("Por Tipo");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem13);
-
-        jMenuItem14.setText("Por Fecha");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem14);
-
-        jMenuItem15.setText("Por Mes");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem15);
-
-        jMenuItem16.setText("Por Año");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem16);
-
-        jMenuItem17.setText("Todas Las Facturas");
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem17);
-
-        jMenuItem18.setText("Por Intervalo de Tiempo");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem18);
-
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jMenuItem19.setText("Por Razon Social del Proveedor ");
         jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,31 +232,66 @@ public static String a;
         });
         jMenu4.add(jMenuItem19);
 
-        jMenuItem20.setText("Por Nombre Comercial del Proveedor");
-        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
+        jMenuItem13.setText("Por Tipo");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem20ActionPerformed(evt);
+                jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem20);
+        jMenu4.add(jMenuItem13);
+
+        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
+        jMenuItem18.setText("Por Intervalo de Tiempo");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem18);
+
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
+        jMenuItem14.setText("Por Fecha");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem14);
+
+        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
+        jMenuItem16.setText("Por Año");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem16);
+
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
+        jMenuItem15.setText("Por Mes");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem15);
+
+        jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
+        jMenuItem17.setText("Todas Las Facturas");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem17);
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Reportes");
+        jMenu6.setText("Sesión");
 
-        jMenuItem22.setText("Generar Reporte");
-        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem22ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem22);
-
-        jMenuBar1.add(jMenu5);
-
-        jMenu6.setText("Login");
-
-        jMenuItem21.setText("Agregar Cuenta");
+        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/Copia de copy.gif"))); // NOI18N
+        jMenuItem21.setText("Iniciar Sesión");
         jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem21ActionPerformed(evt);
@@ -300,7 +299,8 @@ public static String a;
         });
         jMenu6.add(jMenuItem21);
 
-        jMenuItem23.setText("Eliminar Cuenta");
+        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/delete.gif"))); // NOI18N
+        jMenuItem23.setText("Cerrar Sesión");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem23ActionPerformed(evt);
@@ -318,96 +318,105 @@ public static String a;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Escritorio))
+                .addComponent(Escritorio)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Escritorio))
+            .addComponent(Escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //<editor-fold desc="Menú: Usuario, Submenú: Agregar">
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
-AUsuario a=new AUsuario();
-this.Escritorio.add(a);
-a.show();
+        AUsuario a=new AUsuario();
+        this.Escritorio.add(a);
+        a.show();
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+    //</editor-fold>
 
+    //<editor-fold desc="Menú: Usuario, Submenú: Consultar">
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
- coUsuario co=new coUsuario();
- this.Escritorio.add(co);
- co.show();
- 
-    // TODO add your handling code here:
+        coUsuario co=new coUsuario();
+        this.Escritorio.add(co);
+        co.show();
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Usuario, Submenú: Actualizar Usuario">
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
       actUsuario au=new actUsuario();
       this.Escritorio.add(au);
-au.show();// TODO add your handling code here:
+      au.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Proveedor, Submenú: Agregar">
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-aProveedor ap=new aProveedor();
-this.Escritorio.add(ap);
-ap.show();
-// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-actProveedor actp=new actProveedor();
-this.Escritorio.add(actp);
-actp.show();// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-elUsuario eu=new elUsuario();
-this.Escritorio.add(eu);
-eu.show();
+        AProveedor ap=new AProveedor();
+        this.Escritorio.add(ap);
+        ap.show();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Proveedor, Submenú: Actualizar">
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        actProveedor actp=new actProveedor();
+        this.Escritorio.add(actp);
+        actp.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Proveedor, Submenú: Eliminar">
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
        elProveedor ep=new elProveedor();
        this.Escritorio.add(ep);
-       ep.show();
-          
+       ep.show();        
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Proveedor, Submenú: Buscar">
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-busProveedor bp=new busProveedor();
-this.Escritorio.add(bp);
-bp.show();// TODO add your handling code here:
+        busProveedor bp=new busProveedor();
+        this.Escritorio.add(bp);
+        bp.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Factura, Submenú: Agregar">
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-aFactura af=new aFactura();
-this.Escritorio.add(af);
-af.show();// TODO add your handling code here:
+        aFactura af=new aFactura();
+        this.Escritorio.add(af);
+        af.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem9ActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Factura, Submenú: Eliminar">
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-elFactura ef=new elFactura();
-this.Escritorio.add(ef);
-ef.show();// TODO add your handling code here:
+        elFactura ef=new elFactura();
+        this.Escritorio.add(ef);
+        ef.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem10ActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú: Factura, Submenú: Actualizar">
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-actFactura af=new actFactura();
-this.Escritorio.add(af);
-af.show();
+        actFactura af=new actFactura();
+        this.Escritorio.add(af);
+        af.show();
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem11ActionPerformed
-
+    //</editor-fold>
+    
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
- porProveedor pp=new porProveedor();
- this.Escritorio.add(pp);
-pp.show();// TODO add your handling code here:
+        porProveedor pp=new porProveedor();
+        this.Escritorio.add(pp);
+        pp.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
@@ -435,49 +444,65 @@ this.Escritorio.add(pa);
 pa.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    //<editor-fold>
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-todasFacturas tf=new todasFacturas();
-this.Escritorio.add(tf);
-tf.show();// TODO add your handling code here:
+        todasFacturas tf=new todasFacturas();
+        this.Escritorio.add(tf);
+        tf.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
+    //<editor-fold>
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-porIntervalo pi=new porIntervalo();
-this.Escritorio.add(pi);
-pi.show();// TODO add your handling code here:
+        porIntervalo pi=new porIntervalo();
+        this.Escritorio.add(pi);
+        pi.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
 porRazon pr=new porRazon();
 this.Escritorio.add(pr);
 pr.show();
-// TODO add your handling code here:
+// TODO add your handling code here:1723048979
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
-    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-porNombre pn=new porNombre();
-this.Escritorio.add(pn);
-pn.show();// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem20ActionPerformed
-
-    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-reportePDF rp=new reportePDF();
-this.Escritorio.add(rp);
-rp.show();// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem22ActionPerformed
-
+    //<editor-fold desc="Menú: Login, Submenú: Iniciar sesión">
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-aCuenta acu=new aCuenta();
-this.Escritorio.add(acu);
-acu.show();// TODO add your handling code here:
+        login log = new login();
+        this.Escritorio.add(log);
+        log.show();
+        jMenuItem21.setEnabled(false);
+        jMenuItem23.setEnabled(true);
+        
+        //<editor-fold desc="Era para agregar cuenta, ya no se usa">
+        /*aCuenta acu=new aCuenta
+        this.Escritorio.add(acu);
+        acu.show();*/
+        //</editor-fold>
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem21ActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold desc="Menú Login, Submenú: Cerrar sesión">
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-eCuenta ecs=new eCuenta();
-this.Escritorio.add(ecs);
-ecs.show();// TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(null, "Realmente quiere cerrar la sesión actual?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            jMenu1.setEnabled(false);
+            jMenu2.setEnabled(false);
+            jMenu3.setEnabled(false);
+            jMenu4.setEnabled(false);
+           
+            jMenuItem21.setEnabled(true);
+            jMenuItem23.setEnabled(false);
+        }
+        
+        //<editor-fold desc="Esto era para eliminar cuenta, ya no se usa">
+        /*eCuenta ecs=new eCuenta();
+        this.Escritorio.add(ecs);
+        ecs.show();*/
+        //</editor-fold>
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem23ActionPerformed
-
+    //</editor-fold>
+    
     /**
      * @param args the command line arguments
      */
@@ -508,7 +533,10 @@ ecs.show();// TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new aplicacion().setVisible(true);
+               
+                    new aplicacion().setVisible(true);
+                
+                    
             }
         });
     }
@@ -519,7 +547,6 @@ ecs.show();// TODO add your handling code here:
     public static javax.swing.JMenu jMenu2;
     public static javax.swing.JMenu jMenu3;
     public static javax.swing.JMenu jMenu4;
-    public static javax.swing.JMenu jMenu5;
     public static javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -534,12 +561,9 @@ ecs.show();// TODO add your handling code here:
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
@@ -547,3 +571,6 @@ ecs.show();// TODO add your handling code here:
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
+/*Es mejor que el usuario agrege a tantos usuarios como quiera en el primer ingreso
+* Se debe presentar un mensaje que le indique qué tipo de sesión ha iniciado.
+*/

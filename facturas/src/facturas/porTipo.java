@@ -24,7 +24,7 @@ DefaultTableModel modelo;
      */
     public porTipo() {
         initComponents();
-        String cabecera[]={"# Factura","Fecha","SubTotal","Descuento","IVA","Total","Responsable","tipo","ice","propietario","Emisor"};
+        String cabecera[]={"Emisor","# Factura","Tipo", "Fecha","SubTotal","Descuento","IVA","ICE", "Total"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
@@ -39,26 +39,29 @@ for (int i = 0; i < modelo.getRowCount(); i++) {
         
         
     conectar con=new  conectar();
-Connection reg=con.conexion();
+Connection reg=con.Conectar();
 String tip=(String) jComboBox1.getSelectedItem();
         Statement st;
     try {
         st = reg.createStatement();
-         ResultSet rs=st.executeQuery("select*from factura where tipFactura='"+tip+"'");
-        while(rs.next()){
-/*,,,,,,,,,*/  
-            String num=rs.getString("idFactura");
-            String a=rs.getString("fecFactura");
-            String b=rs.getString("subtFactura");
-            String c=rs.getString("descFactura");
-            String d=rs.getString("ivaFactura");
-            String e=rs.getString("totFactura");
-            String f=rs.getString("respFactura");
-            String g=rs.getString("tipFactura");  
-            String h=rs.getString("iceFactura"); 
-            String i=rs.getString("Usuario_cedUsuario");  
-            String j=rs.getString("Proveedor_rucProveedor");  
-            Object datos[]={num,a,b,c,d,e,f,g,h,i,j};
+         ResultSet rs=st.executeQuery("select p.razProveedor, f.numFactura, f.tipFactura, f.fecFactura, " +
+                     "f.subFactura, f.descFactura, f.ivaFactura, f.iceFactura, f.totFactura from proveedor p, factura f, usuario u " +
+                    "where p.rucProveedor = f.rucProveedor and u.cedUsuario = f.cedUsuario and u.cedUsuario='"+aplicacion.user+"' "
+                 + "and tipFactura='"+tip+"'");
+            /*select p.razProveedor, f.numFactura, u.nomUsuario, f.tipFactura, f.fecFactura,"
+                    + "f.subFactura, f.descFactura, f.ivaFactura, f.iceFactura, f.totFactura from proveedor p, factura f, usuario u"
+                    + "where p.rucProveedor = f.rucProveedor and u.cedUsuario = f.cedUsuario and u.cedUsuario='"+aplicacion.user+"'*/
+            while(rs.next()){ 
+                String num=rs.getString("razProveedor");
+                String a=rs.getString("numFactura");
+                String c=rs.getString("tipFactura");
+                String d=rs.getString("fecFactura");
+                String e=rs.getString("subFactura");
+                String f=rs.getString("descFactura");
+                String g=rs.getString("ivaFactura");  
+                String h=rs.getString("iceFactura"); 
+                String i=rs.getString("totFactura");  
+                Object datos[]={num,a,c,d,e,f,g,h,i};
             modelo.addRow(datos);
            
             }
@@ -84,6 +87,7 @@ String tip=(String) jComboBox1.getSelectedItem();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -95,6 +99,7 @@ String tip=(String) jComboBox1.getSelectedItem();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Salud", "Alimentación", "Ecuación", "Vestimenta", "Vivienda", "Mixta" }));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,34 +120,39 @@ String tip=(String) jComboBox1.getSelectedItem();
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/open.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(150, 150, 150)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(244, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(168, 168, 168))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -157,6 +167,7 @@ mostrar();        // TODO add your handling code here:
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

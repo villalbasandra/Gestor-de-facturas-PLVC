@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package facturas;
 
 import java.sql.Connection;
@@ -19,54 +14,45 @@ import javax.swing.table.DefaultTableModel;
  * @author Alex
  */
 public class elFactura extends javax.swing.JInternalFrame {
-DefaultTableModel modelo;
+    DefaultTableModel modelo;
+    private String ruc;
+    Operaciones operar=new Operaciones();
     /**
      * Creates new form elFactura
      */
     public elFactura() {
         initComponents();
-        /*fecFactura,subtFactura,descFactura,ivaFactura,totFact
-ura,respFactura,tipFactura,iceFactura,Usuario_cedUsuario,Proveedor_rucProveedor
-*/
-        String cabecera[]={"# Factura","Fecha","SubTotal","Descuento","IVA","Total","Responsable","tipo","ice","propietario","Emisor"};
+        String cabecera[]={"Emisor","# Factura","Tipo", "Fecha","SubTotal","Descuento","IVA","ICE", "Total"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
-         jTextField1.setText("");
-        jTextField1.requestFocus();
-        mostrar();
+        operar.TablaFactura("", modelo);
+        operar.ComboRucRazon("razProveedor", jComboBox1);
     }
-private void mostrar(){
-for (int i = 0; i < modelo.getRowCount(); i++) {
-           modelo.removeRow(i);
-           i-=1;
-       }
-conectar con=new  conectar();
-Connection reg=con.conexion();
-        Statement st;
-    try {
-        st = reg.createStatement();
-         ResultSet rs=st.executeQuery("select*from factura");
+    
+    //Cargar proveedores
+    
+    //Obtiene el ruc del proveedor
+    private void Ruc(String razon){
+        conectar con=new  conectar();
+        Connection reg=con.Conectar();
+        try {
+            Statement st=reg.createStatement();
+            ResultSet rs=st.executeQuery("select rucProveedor from proveedor where razProveedor='"+ razon+"'");
         while(rs.next()){
-/*,,,,,,,,,*/  
-            String num=rs.getString("idFactura");
-            String a=rs.getString("fecFactura");
-            String b=rs.getString("subtFactura");
-            String c=rs.getString("descFactura");
-            String d=rs.getString("ivaFactura");
-            String e=rs.getString("totFactura");
-            String f=rs.getString("respFactura");
-            String g=rs.getString("tipFactura");  
-            String h=rs.getString("iceFactura"); 
-            String i=rs.getString("Usuario_cedUsuario");  
-            String j=rs.getString("Proveedor_rucProveedor");  
-            Object datos[]={num,a,b,c,d,e,f,g,h,i,j};
-            modelo.addRow(datos);
-            }
-    } catch (SQLException ex) {
-        Logger.getLogger(elProveedor.class.getName()).log(Level.SEVERE, null, ex);
+                
+            ruc=rs.getString("rucProveedor");        
+            //Object datos[]={d,f,a,b,c,e};
+           
+           
+            } 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(aFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //return ruc;
     }
-}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,10 +63,13 @@ Connection reg=con.conexion();
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -89,8 +78,10 @@ Connection reg=con.conexion();
         setTitle("Eliminar Factura");
         setAutoscrolls(true);
 
-        jLabel1.setText("Numero Factura:");
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel1.setText("Núm. Factura:");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/delete.gif"))); // NOI18N
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,69 +102,129 @@ Connection reg=con.conexion();
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/delete.png"))); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel3.setText("Proveedor");
+
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(243, 243, 243)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(92, 92, 92)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(330, 330, 330)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-conectar con=new  conectar();
-Connection reg=con.conexion();
-        String ced=jTextField1.getText();
-        Statement st;
-    try {
-        st = reg.createStatement();
-        String sql="delete from factura where idFactura="+ced;
-             int rs=st.executeUpdate(sql);
-             if(rs==1){
-        JOptionPane.showMessageDialog(null, "Se ha borrado el registro");
+        if(JOptionPane.showConfirmDialog(null, "Seguro de que quiere eliminar la Factura?", "Confirmar operación", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {        
+            conectar con=new  conectar();
+            Connection reg=con.Conectar();
+            String num=(String)jComboBox2.getSelectedItem();
+            String razon = (String)jComboBox1.getSelectedItem();
+            Ruc(razon);
+            Statement st;
+            try {
+                st = reg.createStatement();
+                String sql="delete from factura where rucProveedor='"+ruc+"' and numFactura='"+num+"'";
+                int rs=st.executeUpdate(sql);
+                if(rs==1){
+                    JOptionPane.showMessageDialog(null, "Se ha borrado el registro con éxito.");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo borrar el registro.");
+                }
+
+                operar.TablaFactura("", modelo);
+                operar.ComboRucRazon("razProveedor", jComboBox1);
+        // TODO add your handling code here:
+            } catch (SQLException ex) {
+                Logger.getLogger(elFactura.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        else{
-       JOptionPane.showMessageDialog(null, "No se pudo borrar el registro");
-        }
-        
-        mostrar();
-        jTextField1.setText("");
-// TODO add your handling code here:
-    } catch (SQLException ex) {
-        Logger.getLogger(elFactura.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        jComboBox2.removeAllItems();
+        conectar con=new  conectar();
+        Connection reg=con.Conectar();
+        Statement st;
+        String razon;
+        razon = (String) jComboBox1.getSelectedItem();
+        try {
+            st = reg.createStatement();
+            ResultSet rs=st.executeQuery("select f.numFactura from factura f, proveedor p where p.rucProveedor=f.rucProveedor and"
+                    + " razProveedor='"+razon+"' and  f.cedUsuario='"+aplicacion.user+"'" ); //faltaría seleccionar sólo las del usuario de la sesión
+            while(rs.next()) {
+                String f=rs.getString("numFactura");        
+                //Object datos[]={d,f,a,b,c,e};
+                jComboBox2.addItem(f);          
+            }
+        }
+        catch (SQLException ex) {  
+            Logger.getLogger(elProveedor.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error\n"+ex);
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

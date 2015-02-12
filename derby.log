@@ -1,0 +1,84 @@
+Wed Feb 11 18:26:14 COT 2015 Thread[AWT-EventQueue-0,6,main] Cleanup action starting
+java.sql.SQLException: Database '.\DB\Facturas.DB' not found.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
+	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
+	at java.sql.DriverManager.getConnection(DriverManager.java:579)
+	at java.sql.DriverManager.getConnection(DriverManager.java:243)
+	at facturas.conectar.Conectar(conectar.java:87)
+	at facturas.aplicacion.<init>(aplicacion.java:30)
+	at facturas.aplicacion$22.run(aplicacion.java:553)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:251)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:721)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:682)
+	at java.awt.EventQueue$3.run(EventQueue.java:680)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:691)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+Caused by: java.sql.SQLException: Database '.\DB\Facturas.DB' not found.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	... 31 more
+============= begin nested exception, level (1) ===========
+java.sql.SQLException: Database '.\DB\Facturas.DB' not found.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
+	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
+	at java.sql.DriverManager.getConnection(DriverManager.java:579)
+	at java.sql.DriverManager.getConnection(DriverManager.java:243)
+	at facturas.conectar.Conectar(conectar.java:87)
+	at facturas.aplicacion.<init>(aplicacion.java:30)
+	at facturas.aplicacion$22.run(aplicacion.java:553)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:251)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:721)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:682)
+	at java.awt.EventQueue$3.run(EventQueue.java:680)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:691)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+============= end nested exception, level (1) ===========
+Cleanup action completed
+----------------------------------------------------------------
+Wed Feb 11 18:27:20 COT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-014b-7af6-dc52-000003332ba8 
+on database directory D:\Proyecto Libres\Proyecto\Gestor-de-facturas-PLVC-master\Gestor-de-facturas-PLVC-master\DB\Facturas.DB  with class loader sun.misc.Launcher$AppClassLoader@1e5b02a6 
+Loaded from file:/D:/Proyecto%20Libres/Proyecto/Gestor-de-facturas-PLVC-master/Gestor-de-facturas-PLVC-master/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_10-b18
+user.dir=D:\Proyecto Libres\Proyecto\Gestor-de-facturas-PLVC-master\Gestor-de-facturas-PLVC-master
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

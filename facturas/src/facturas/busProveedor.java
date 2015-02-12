@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package facturas;
 
 import java.sql.Connection;
@@ -18,21 +13,37 @@ import javax.swing.table.DefaultTableModel;
  * @author Alex
  */
 public class busProveedor extends javax.swing.JInternalFrame {
-DefaultTableModel modelo;
+    DefaultTableModel modelo;
+    Operaciones operar = new Operaciones();
     /**
      * Creates new form busProveedor
      */
     public busProveedor() {
         initComponents();
-        String cabecera[]={"Ruc","Razon Social","Direccion","Telefono","Nombre Comercial"};
+        String cabecera[]={"Ruc","Razón Social","Nombre Comercial","Dirección","Teléfono"};
         String datos[][]={};
         modelo=new DefaultTableModel(datos,cabecera);
         jTable1.setModel(modelo);
-        jTextField2.setText("");
-       
-        jTextField2.requestFocus();
+        operar.ComboRucRazon("razProveedor", jComboBox1);
     }
 
+    /*private void combo(){
+        conectar con=new  conectar();
+        Connection reg=con.Conectar();
+        try {
+            Statement st=reg.createStatement();
+            ResultSet rs=st.executeQuery("select razProveedor from proveedor");
+            while(rs.next()){
+                String f=rs.getString("razProveedor");        
+                //Object datos[]={d,f,a,b,c,e};
+                jComboBox1.addItem(f);          
+            }             
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(aFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,11 +54,12 @@ DefaultTableModel modelo;
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -55,7 +67,8 @@ DefaultTableModel modelo;
         setResizable(true);
         setTitle("Buscar Proveedor");
 
-        jLabel1.setText("RUC:");
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel1.setText("Razón Social:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,6 +83,7 @@ DefaultTableModel modelo;
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/set-1/preview.gif"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +91,7 @@ DefaultTableModel modelo;
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos-16x16-gif-transparente-1/edit.gif"))); // NOI18N
         jButton2.setText("Mostrar todos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,123 +99,123 @@ DefaultTableModel modelo;
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.PNG"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(136, 136, 136)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton2)
+                                .addGap(59, 59, 59)))
+                        .addComponent(jButton1)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private void mostrarR(){
-String ced;
-       ced=jTextField2.getText();
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-           modelo.removeRow(i);
-           i-=1;
-       }
-conectar con=new  conectar();
-Connection reg=con.conexion();
-    try {
-        Statement st=reg.createStatement();
-     ResultSet rs=st.executeQuery("select*from proveedor where rucProveedor='"+ced+"'");
-        while(rs.next()){
-                
-              String a=rs.getString("razonProveedor");
-            String b=rs.getString("dirProveedor");
-            String c=rs.getString("telProveedor");
-            String e=rs.getString("nomComProveedor");
-            String f=rs.getString("rucProveedor");        
-            Object datos[]={f,a,b,c,e};
-            modelo.addRow(datos);
-           
-            }       
-    } catch (SQLException ex) {
-        Logger.getLogger(busProveedor.class.getName()).log(Level.SEVERE, null, ex);
-    }
 
-}
-private void mostrartodo(){
-String ced;
-       ced=jTextField2.getText();
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-           modelo.removeRow(i);
-           i-=1;
-       }
-conectar con=new  conectar();
-Connection reg=con.conexion();
-    try {
-        Statement st=reg.createStatement();
-     ResultSet rs=st.executeQuery("select*from proveedor ");
-        while(rs.next()){
-                
-              String a=rs.getString("razonProveedor");
-            String b=rs.getString("dirProveedor");
-            String c=rs.getString("telProveedor");
-            String e=rs.getString("nomComProveedor");
-            String f=rs.getString("rucProveedor");        
-            Object datos[]={f,a,b,c,e};
-            modelo.addRow(datos);
-           
+    /*private void mostrarR(String razon){
+        for (int i = 0; i < modelo.getRowCount(); i++) {         
+            modelo.removeRow(i);
+            i-=1;    
+        }
+        conectar con=new  conectar();
+        Connection reg=con.Conectar();
+        try {
+            Statement st=reg.createStatement();
+            ResultSet rs=st.executeQuery("select*from proveedor where razProveedor='"+razon+"'");
+            while(rs.next()){
+                String f=rs.getString("rucProveedor");
+                String a=rs.getString("razProveedor");
+                String e=rs.getString("nomcomProveedor");
+                String b=rs.getString("dirProveedor");
+                String c=rs.getString("telProveedor");      
+                Object datos[]={f,a,e,b,c};
+                modelo.addRow(datos);            
             }       
-    } catch (SQLException ex) {
-        Logger.getLogger(busProveedor.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(busProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
 
-}
+    private void mostrartodo(){
+        for (int i = 0; i < modelo.getRowCount(); i++) {      
+            modelo.removeRow(i);
+            i-=1;
+        }
+        conectar con=new  conectar();
+        Connection reg=con.Conectar();
+        try {     
+            Statement st=reg.createStatement();
+            ResultSet rs=st.executeQuery("select*from proveedor ");
+            while(rs.next()) {
+                String f=rs.getString("rucProveedor");
+                String a=rs.getString("razProveedor");
+                String e=rs.getString("nomcomProveedor");
+                String b=rs.getString("dirProveedor");
+                String c=rs.getString("telProveedor");  
+                Object datos[]={f,a,e,b,c};
+                modelo.addRow(datos);           
+            }           
+        }
+        catch (SQLException ex) {    
+            Logger.getLogger(busProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-String a,b,c;
-a=jTextField2.getText();
-
-
-mostrarR();
-
-         
+        String razon;
+        razon=(String)jComboBox1.getSelectedItem();
+        operar.TablaProveedores("select * from proveedor where razProveedor='"+razon+"'", modelo);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      mostrartodo();  // TODO add your handling code here:
+       operar.TablaProveedores("select * from proveedor", modelo);
+// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
